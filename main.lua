@@ -1,29 +1,23 @@
 
 require('lovestates')
 require('validate_state')
+require('anim_state')
 
 states = {
     validate_state = build_validate_state(),
+    anim_state = build_anim_state()
 }
 
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
+TEXT_HEIGHT = 15
 IMAGE_PATH = 'input/anim.png'
 
--- LOVE 2D WRAPPERS
 function love.load()
     love.window.setTitle( 'Animation viewer' )
     w, h, flags = love.window.getMode( )
     switch_state( 'validate_state' )
-  --  font = love.graphics.newFont( 'font.ttf', 35 )
---    love.graphics.setFont( font )
-    -- debugtxt = 'hello'
-
-    -- soundtrack = love.audio.newSource("soundtrack.xm")
-    -- soundtrack:setVolume(0.9)
-    -- soundtrack:setPitch(0.5)     
-    -- soundtrack:play()
-    -- soundtrack:setLooping( true )
 end
-
 
 function love.update( dt )
     state.update( dt )
@@ -31,11 +25,10 @@ end
 
 function love.draw()
     if debugtxt then
-        local posy = SCREEN_HEIGHT-40
-        love.graphics.setColor(0, 0, 0, 255)
-        love.graphics.print(debugtxt, 0, posy, 0, 0.5, 0.5)
+        love.graphics.setColor(255, 255, 255, 255)
+        love.graphics.print(debugtxt, 0, SCREEN_HEIGHT-TEXT_HEIGHT, 0, 1, 1)
         love.graphics.print('FPS:' .. love.timer.getFPS(),
-            SCREEN_WIDTH-150, posy, 0, 0.5, 0.5)
+            0, 0, 0, 1, 1)
     end
     state.draw()
 end
@@ -48,4 +41,12 @@ end
 function love.keyreleased( key )
     state.keyreleased( key )
     -- debugtxt = 'Key string: ' .. key
+end
+
+function love.mousepressed(x, y, button, istouch)
+    state.mousepressed(x, y, button, istouch)
+end
+
+function love.mousereleased(x, y, button, istouch)
+    state.mousereleased(x, y, button, istouch)
 end

@@ -12,6 +12,8 @@ function lovestate()
 		draw = function() end,
 		update = function( dt ) end,
 		keypressed = function( key ) end,
-		keyreleased = function ( key ) end
+		keyreleased = function ( key ) end,
+		mousepressed = function( x, y, button, istouch) end,
+		mousereleased = function(x, y, button, istouch) end,
 	}
 end

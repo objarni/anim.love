@@ -74,7 +74,20 @@ Width is mulitiple of height
 			return
 		end
 
-		msg = "all validation tests passed"
+		-- build keyframes = quads
+
+		quads = {}
+		keyframeCount = w/h
+		msg = ''
+		for i = 0, keyframeCount - 1 do
+			local x = i * h
+			quads[i] =
+				love.graphics.newQuad(x, 0, h, h, w, h)
+			print(i)
+		end
+
+		switch_state('anim_state')
+		-- msg = "all validation tests passed"
 		-- switch_state('animate_state')
 	end
 	
