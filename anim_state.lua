@@ -17,6 +17,7 @@ function build_anim_state()
 	end
 
 	state.init = function()
+		modtime, errormsg = love.filesystem.getLastModified( IMAGE_PATH )
 	end
 
 	state.draw = function()
@@ -25,6 +26,10 @@ function build_anim_state()
 	end
 
 	state.update = function( dt )
+		local mtime, errmsg = love.filesystem.getLastModified( IMAGE_PATH)
+		if mtime ~= modtime then
+			switch_state('validate_state')
+		end
 		time = time + dt
 		frame = intmod(intdiv(time, animPeriod), keyframeCount)
 		debugtxt = tostring(frame)
